@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Car Parking System</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.1/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold">Parkly</a>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="index.html" class="text-gray-600 hover:text-gray-900">Register</a></li>
+                    <li><a href="dashboard.html" class="text-gray-600 hover:text-gray-900">Dashboard</a></li>
+                    <li><a href="slots.html" class="text-gray-600 hover:text-gray-900">Slots</a></li>
+                    <li><a href="report.html" class="text-gray-600 hover:text-gray-900">Reports</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="container mx-auto px-4 py-16">
+        <h2 class="text-3xl font-bold text-center mb-10">Parking Slots</h2>
+
+        <div class="grid grid-cols-10 gap-4 max-w-6xl mx-auto">
+            <!-- Slot placeholders -->
+            <div id="slot0" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot1" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot2" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot3" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot4" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot5" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot6" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot7" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot8" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot9" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot10" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot11" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot12" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot13" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot14" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot15" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot16" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot17" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot18" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot19" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot20" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot21" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot22" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot23" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot24" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot25" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot26" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot27" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot28" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot29" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot30" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot31" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot32" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot33" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot34" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot35" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot36" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot37" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot38" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot39" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot40" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot41" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot42" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot43" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot44" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot45" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot46" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot47" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot48" class="slot p-4 rounded shadow-md"></div>
+            <div id="slot49" class="slot p-4 rounded shadow-md"></div>
+        </div>
+    </section>
+
+    <script>
+        function loadParkingSlots() {
+            const parkingSlots = JSON.parse(localStorage.getItem('parkingSlots')) || Array(50).fill(null);
+
+            parkingSlots.forEach((slot, index) => {
+                const slotDiv = document.getElementById(`slot${index}`);
+                slotDiv.className = `slot p-4 rounded shadow-md ${slot ? 'bg-red-500' : 'bg-green-500'}`; // Red for occupied, green for available
+
+                if (slot) {
+                    slotDiv.innerHTML = `
+                        <p align="center"> #${index + 1} ${slot.carName} (${slot.carNumber})</p> <br>
+                        <button class="bg-white text-black px-3 py-1 rounded shadow-md" onclick="checkout(${index})">Checkout</button>
+                    `;
+                } else {
+                    slotDiv.innerHTML = `<p align="center">${index + 1} Available</p>`;
+                }
+            });
+        }
+
+        function checkout(slotIndex) {
+            const parkingSlots = JSON.parse(localStorage.getItem('parkingSlots'));
+            const cars = JSON.parse(localStorage.getItem('cars')) || [];
+
+            if (parkingSlots[slotIndex]) {
+                const car = parkingSlots[slotIndex];
+                const checkOutTime = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+                
+                // Calculate total time parked (in hours for example)
+                const parkedDuration = new Date() - new Date(car.checkinTime);
+                const parkedHours = Math.floor(parkedDuration / (1000 * 60 * 60)); // Convert ms to hours
+                
+                // Example rate calculation (modify as needed)
+                const ratePerHour = 20; // Change rate as needed
+                const totalAmount = parkedHours * ratePerHour;
+
+                // Update cars array
+                const index = cars.findIndex(c => c.carNumber === car.carNumber);
+                if (index !== -1) {
+                    cars.splice(index, 1); // Remove the checked-out car
+                }
+
+                // Mark slot as available
+                parkingSlots[slotIndex] = null;
+
+                // Store updated data
+                localStorage.setItem('cars', JSON.stringify(cars));
+                localStorage.setItem('parkingSlots', JSON.stringify(parkingSlots));
+
+                alert(`Checkout successful! Total Amount: ₹${totalAmount}\nCheck-out Time: ${checkOutTime}`);
+                loadParkingSlots(); // Reload parking slots
+            } else {
+                alert('Slot is already empty!');
+            }
+        }
+
+        // Load parking slots on page load
+        document.addEventListener('DOMContentLoaded', loadParkingSlots);
+    </script>
+</body>
+</html>

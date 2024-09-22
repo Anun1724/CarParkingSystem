@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Temporary hardcoded admin credentials
+    const adminEmail = "admin@example.com";
+    const adminPassword = "admin123";
+
+    // Function to handle login
+    function handleLogin(event) {
+      event.preventDefault();
+
+      const enteredEmail = document.getElementById("email").value;
+      const enteredPassword = document.getElementById("password").value;
+
+      // Check if entered email and password match hardcoded credentials
+      if (enteredEmail === adminEmail && enteredPassword === adminPassword) {
+        alert("Login successful! Redirecting to the admin dashboard...");
+        // Redirect to the admin dashboard (You can replace this with the actual URL)
+        window.location.href = "./admin/dashboard.html";
+      } else {
+        alert("Invalid email or password. Please try again.");
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900">
+
+  <div class="min-h-screen flex items-center justify-center">
+    <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md w-full max-w-md">
+      
+      <!-- Admin Login Heading -->
+      <h2 class="text-3xl font-bold text-gray-800 dark:text-white text-center mb-6">Admin Login</h2>
+      
+      <!-- Login Form -->
+      <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-6">
+        
+        <!-- Email Field -->
+        <div>
+          <label for="email" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Admin Email</label>
+          <input type="email" id="email" class="w-full p-3 rounded-lg border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="Enter your email" required>
+        </div>
+
+        <!-- Password Field -->
+        <div>
+          <label for="password" class="block text-gray-700 dark:text-gray-300 font-semibold mb-2">Password</label>
+          <input type="password" id="password" class="w-full p-3 rounded-lg border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="Enter your password" required>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="mt-4">
+          <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg transition duration-300">Login</button>
+        </div>
+      </form>
+
+      <!-- Additional Links -->
+      <div class="mt-6 text-center">
+        <p class="text-gray-600 dark:text-gray-400">
+          <a href="#" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">Forgot Password?</a>
+        </p>
+        <p class="text-gray-600 dark:text-gray-400 mt-4">Not an admin?
+          <a href="#" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">Create an account</a>.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
